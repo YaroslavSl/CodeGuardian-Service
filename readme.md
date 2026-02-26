@@ -1,4 +1,4 @@
-# setup requirements:
+# Setup requirements
 
 ## Run a redis for queues
 
@@ -14,7 +14,13 @@ Here all temporary files will be saved, then processed then deleted
 mkdir "../stats/"
 ```
 
-# Test and verificate
+## Initialization & running
+
+```bash
+npm run build && node --max-old-space-size=150 dist/main.js
+```
+
+# Verification and Testing
 
 ```bash
 SCAN_ID=$(curl -s -X POST http://localhost:3000/api/scan \
@@ -22,7 +28,13 @@ SCAN_ID=$(curl -s -X POST http://localhost:3000/api/scan \
   -d '{"repoUrl":"https://github.com/BobTheShoplifter/Spring4Shell-POC"}' | jq -r '.scanId') && curl -s "http://localhost:3000/api/scan/$SCAN_ID" | jq
 ```
 
-# Test and verificate(other sets of commands)
+then check status:
+
+```
+curl -s "http://localhost:3000/api/scan/$SCAN_ID" | jq
+```
+
+# Verification and Testing (other sets of commands)
  
 ```bash
 curl -X POST http://localhost:3000/api/scan \
